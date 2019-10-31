@@ -5,7 +5,8 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  Container
+  Container,
+  NavLink
 } from 'reactstrap';
 
 export default class AppNavbar extends Component {
@@ -33,7 +34,14 @@ export default class AppNavbar extends Component {
             <NavbarBrand href="/">Compilador</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={isOpen} navbar>
-              <Nav className="ml-auto" navbar />
+              <Nav className="ml-auto" navbar>
+                <NavLink
+                  target="_blank"
+                  href="https://www.notion.so/juancasian/Manual-Carros-Aut-nomos-0155c8aaaf4b4b14946def2fda79d011"
+                >
+                  Manual de Proyecto
+                </NavLink>
+              </Nav>
             </Collapse>
           </Container>
         </Navbar>
