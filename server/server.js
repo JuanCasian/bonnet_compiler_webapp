@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const { exec } = require('child_process');
 const path = require('path');
 
-const PORT = 5000;
+const PORT = 80;
 const app = express();
 let counter = 1;
 
@@ -36,25 +36,24 @@ app.post('/compiler', (req, res) => {
         counter += 1;
         return res.status(500).json({ msg: 'Error al compilar' });
       }
-      const options = {
-        root: __dirname,
-        headers: {
-          'content-type': 'application/octet-stream'
-        }
-      };
-      return res.sendFile(
-        `./compiled/car${counter}.binaryproto`,
-        options,
-        () => {
-          counter += 1;
-        }
-      );
+
+      res.json({ counter });
+      counter += 1;
+      return false;
     });
   } catch (err) {
     res.status(500).json({ msg: 'Sever Error' });
     counter += 1;
   }
   return false;
+});
+
+app.get('/download/:counter', (req, res) => {
+  const { counter: localCounter } = req.params;
+  return res.download(
+    `./compiled/car${localCounter}.binaryproto`,
+    'car.binaryproto'
+  );
 });
 
 app.use(express.static(path.resolve(__dirname, '..', 'client', 'build')));

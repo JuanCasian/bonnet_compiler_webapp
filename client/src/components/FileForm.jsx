@@ -20,7 +20,9 @@ export default class FileForm extends Component {
       selectedFile: null,
       loading: false,
       error: '',
-      isVisible: false
+      isVisible: false,
+      download: false,
+      counter: null
     };
   }
 
@@ -37,13 +39,11 @@ export default class FileForm extends Component {
       data
     })
       .then(response => {
-        this.setState({ loading: false });
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'car.binaryproto');
-        document.body.appendChild(link);
-        link.click();
+        this.setState({
+          loading: false,
+          download: true,
+          counter: response.data.counter
+        });
       })
       .catch(err => {
         const { data: errorData } = err.response;
@@ -66,7 +66,7 @@ export default class FileForm extends Component {
   };
 
   render() {
-    const { loading, error, isVisible } = this.state;
+    const { loading, error, isVisible, download, counter } = this.state;
     return (
       <Container>
         <Alert color="danger" isOpen={isVisible} toggle={this.onDismiss}>
@@ -76,7 +76,9 @@ export default class FileForm extends Component {
           <FormGroup>
             {!loading ? (
               <h1 className="mb-4 text-center">
-                Upload retrained_graph.pb file
+                {!download
+                  ? `Upload retrained_graph.pb file`
+                  : `Download car.binaryProto`}
               </h1>
             ) : null}
             <Row>
@@ -93,7 +95,8 @@ export default class FileForm extends Component {
                     }}
                     color="dark"
                   />
-                ) : (
+                ) : null}
+                {!loading && !download ? (
                   <>
                     <Input
                       className="justify-content-center ml-5 mb-3"
@@ -106,7 +109,17 @@ export default class FileForm extends Component {
                       Upload
                     </Button>
                   </>
-                )}
+                ) : null}
+                {!loading && download ? (
+                  <Button
+                    color="dark"
+                    block
+                    style={{ marginTop: '2rem' }}
+                    href={`/download/${counter}`}
+                  >
+                    Download
+                  </Button>
+                ) : null}
               </Col>
 
               <Col xs="3" sm="3" lg="3" />
