@@ -37,7 +37,7 @@ export default class AppNavbar extends Component {
               <Nav className="ml-auto" navbar>
                 <NavLink
                   target="_blank"
-                  href="https://www.notion.so/juancasian/Manual-Carros-Aut-nomos-0155c8aaaf4b4b14946def2fda79d011"
+                  href="https://www.notion.so/juancasian/Carro-seguidor-de-comandos-b0386feca23d47d6b02fcea42e36c27e"
                 >
                   Manual de Proyecto
                 </NavLink>
