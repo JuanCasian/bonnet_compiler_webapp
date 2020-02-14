@@ -41,6 +41,18 @@ export default class AppNavbar extends Component {
                 >
                   Manual de Proyecto
                 </NavLink>
+                <NavLink
+                  target="_blank"
+                  href="https://www.notion.so/juancasian/Pre-requisitos-para-Reto-Ingen-1-0-d6a052536b0e40919fc40bac32d026da"
+                >
+                  Manual Pre-requisitos
+                </NavLink>
+                <NavLink
+                  target="_blank"
+                  href="https://drive.google.com/open?id=1p9b-FQiUrxTxWAJudBipPHh49aGIBRaN"
+                >
+                  APK Google AIY Projects
+                </NavLink>
               </Nav>
             </Collapse>
           </Container>
